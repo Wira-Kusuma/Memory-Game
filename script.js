@@ -205,11 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     // Called when user clicks “Start Game”
     function onStartGame() {
-        // expand to more height, to avoid scroll in landing page before play
-        document.body.style.height="150vh";
 
+        // footer back to normal
+        document.getElementById("footer").style.position="static";
+        
         
         dimension = parseInt(gridSizeSelect.value, 10);
         totalPairs = (dimension * dimension) / 2;
