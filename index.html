@@ -1,166 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <title>Memory Game</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+  <title>Memory Game</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet" />
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="img/memory.png" type="image/x-icon" />
-  </head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
-  <body data-bs-theme="light">
-    <header class="py-3 mb-4 border-bottom shadow-sm">
-      <div
-        class="container d-flex flex-column flex-md-row align-items-center justify-content-between"
-      >
-        <h1
-          class="h4 mb-2 mb-md-0"
-          id="game-title"
-          style="font-family: 'Quicksand', sans-serif"
-        >
-          Memory Game
-        </h1>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="img/memory.png" type="image/x-icon" />
+</head>
 
-        <div class="d-flex align-items-center gap-3">
-          <div>
-            <span class="fw-medium">Moves:</span>
-            <span id="move-counter" class="fw-semibold">0</span>
-          </div>
+<body data-bs-theme="light">
+  <header class="py-3 mb-4 border-bottom shadow-sm">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+      <h1 class="h4 mb-2 mb-md-0" id="game-title" style="font-family: 'Quicksand', sans-serif">
+        Memory Game
+      </h1>
 
-          <div>
-            <span class="fw-medium">Time:</span>
-            <span id="timer" class="fw-semibold">00:00</span>
-          </div>
+      <div class="d-flex align-items-center gap-3">
+        <div>
+          <span class="fw-medium">Moves:</span>
+          <span id="move-counter" class="fw-semibold">0</span>
+        </div>
 
-          <button
-            type="button"
-            id="restart-btn"
-            class="btn btn-sm btn-outline-primary"
-          >
-            🔄 Restart
-          </button>
+        <div>
+          <span class="fw-medium">Time:</span>
+          <span id="timer" class="fw-semibold">00:00</span>
+        </div>
 
-          <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="theme-toggle"
-              aria-label="Toggle dark/light mode"
-            />
-            <label class="form-check-label" for="theme-toggle">Dark Mode</label>
-          </div>
+        <button type="button" id="restart-btn" class="btn btn-sm btn-outline-primary">
+          🔄 Restart
+        </button>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="theme-toggle" aria-label="Toggle dark/light mode" />
+          <label class="form-check-label" for="theme-toggle">Dark Mode</label>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="container">
-      <div class="row mb-4">
-        <div class="col-md-6 offset-md-3">
-          <div class="card p-4 shadow-sm">
-            <h2 class="h5 mb-3 text-center">Choose Grid Size</h2>
-            <div class="d-flex justify-content-center mb-3">
-              <select id="grid-size-select" class="form-select w-50">
-                <option value="4">4 × 4 (16 Cards)</option>
-                <option value="6">6 × 6 (36 Cards)</option>
-              </select>
-            </div>
-            <div class="text-center">
-              <button id="start-game-btn" class="btn btn-primary">
-                Start Game
-              </button>
-            </div>
+  <main class="container">
+    <div class="row mb-4">
+      <div class="col-md-6 offset-md-3">
+        <div class="card p-4 shadow-sm">
+          <h2 class="h5 mb-3 text-center">Choose Grid Size</h2>
+          <div class="d-flex justify-content-center mb-3">
+            <select id="grid-size-select" class="form-select w-50">
+              <option value="4">4 × 4 (16 Cards)</option>
+              <option value="6">6 × 6 (36 Cards)</option>
+            </select>
           </div>
-        </div>
-      </div>
-
-      <!-- ===== Status / Instructions ===== -->
-      <div class="row mb-4" id="status-row" style="display: none">
-        <div class="col text-center">
-          <p id="status-message" class="text-muted">
-            Click on two cards to find a matching pair. Good luck!
-          </p>
-        </div>
-      </div>
-
-      <div class="row gx-3 gy-3" id="game-board">
-        <!-- Cards injected here by script.js once “Start Game” is clicked -->
-      </div>
-    </main>
-
-    <div
-      class="modal fade"
-      id="winModal"
-      tabindex="-1"
-      aria-labelledby="winModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center">
-          <div class="modal-header border-0">
-            <h5
-              class="modal-title mx-auto"
-              id="winModalLabel"
-              style="font-family: 'Quicksand', sans-serif"
-            >
-              🎉 You Won! 🎉
-            </h5>
-          </div>
-          <div class="modal-body">
-            <p class="mb-3">Congratulations, you matched all the pairs!</p>
-            <p class="mb-3">
-              Moves: <span id="final-moves" class="fw-semibold">0</span><br />
-              Time: <span id="final-time" class="fw-semibold">00:00</span>
-            </p>
-            <button type="button" class="btn btn-primary" id="play-again-btn">
-              Play Again
+          <div class="text-center">
+            <button id="start-game-btn" class="btn btn-primary">
+              Start Game
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <footer class="mt-5 py-3 border-top" id="footer">
-      <div class="container text-center">
-        <small class="text-muted" style="font-family: 'Quicksand', sans-serif">
-          Made with 💖 by Sara •
-          <a
-            href="https://github.com/Sara-Codess/Memory-Game"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub
-          </a>
-        </small>
+    <!-- ===== Status / Instructions ===== -->
+    <div class="row mb-4" id="status-row" style="display: none">
+      <div class="col text-center">
+        <p id="status-message" class="text-muted">
+          Click on two cards to find a matching pair. Good luck!
+        </p>
       </div>
-    </footer>
+    </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
-    ></script>
+    <div class="row gx-3 gy-3" id="game-board">
+      <!-- Cards injected here by script.js once “Start Game” is clicked -->
+    </div>
+  </main>
 
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
-  </body>
+  <div class="modal fade" id="winModal" tabindex="-1" aria-labelledby="winModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header border-0">
+          <h5 class="modal-title mx-auto" id="winModalLabel" style="font-family: 'Quicksand', sans-serif">
+            🎉 You Won! 🎉
+          </h5>
+        </div>
+        <div class="modal-body">
+          <p class="mb-3">Congratulations, you matched all the pairs!</p>
+          <p class="mb-3">
+            Moves: <span id="final-moves" class="fw-semibold">0</span><br />
+            Time: <span id="final-time" class="fw-semibold">00:00</span>
+          </p>
+          <button type="button" class="btn btn-primary" id="play-again-btn">
+            Play Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-5 py-3 border-top" id="footer">
+    <div class="container text-center">
+      <small class="text-muted" style="font-family: 'Quicksand', sans-serif">
+        Made with 💖 by Sara •
+        <a href="https://github.com/Sara-Codess/Memory-Game" target="_blank" rel="noopener noreferrer">
+          View on GitHub
+        </a>
+      </small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+</body>
+
 </html>
