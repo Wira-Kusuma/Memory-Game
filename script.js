@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     // Full emoji list for up to 18 unique pairs (max 36 cards)
     const allEmojis = [
@@ -247,4 +246,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial setup
     initializeThemeToggle();
+
 });
