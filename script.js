@@ -174,8 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
         finalMovesEl.textContent = moves;
         finalTimeEl.textContent = timerEl.textContent;
         winModal.show();
-        saveLocalStorage();
-        loadLocalStorage();
+        if(localStorage.getItem("moves") == 0 || finalMovesEl <= localStorage.getItem("moves")) {
+            localStorage.setItem("moves",moves);
+        }   
+        if(localStorage.getItem("minute") == 0 || m == 0) {
+            localStorage.setItem("minute",m);
+        }
+        if(localStorage.getItem("second") == 0 || s <= localStorage.getItem("second")) {
+            localStorage.setItem("second",s);
+        }
     }
 
     function restartGame() {
@@ -250,18 +257,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     startGameBtn.addEventListener('click', onStartGame);
 
-    function saveLocalStorage(total) {
-        localStorage.setItem("moves",moves);
-        localStorage.setItem("times",`${m}:${s}`);
-    }
     function loadLocalStorage() {
+        if(localStorage.getItem("minute") == null) {
+            localStorage.setItem("minute","0");
+        }
+        if(localStorage.getItem("second") == null) {
+            localStorage.setItem("second","0");
+        }
+        if(localStorage.getItem("moves") == null) {
+            localStorage.setItem("moves","0");
+        }
+
+        const min = localStorage.getItem("minute");
+        const sec = localStorage.getItem("second");
+
+        timerEl.innerText=`${min}:${sec}`;
         moveCounterEl.innerText=localStorage.getItem("moves");
-        timerEl.innerText=localStorage.getItem("times");
     }
 
     // Initial setup
     initializeThemeToggle();
     loadLocalStorage();
+    
 
 
 });
