@@ -174,10 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
         finalMovesEl.textContent = moves;
         finalTimeEl.textContent = timerEl.textContent;
         winModal.show();
-        if(localStorage.getItem("moves") == 0 || finalMovesEl <= localStorage.getItem("moves")) {
+        if(localStorage.getItem("moves") == 0 || moves <= localStorage.getItem("moves")) {
             localStorage.setItem("moves",moves);
         }   
-        if(localStorage.getItem("minute") == 0 || m == 0) {
+        if(localStorage.getItem("minute") == 0 || m <= 0) {
             localStorage.setItem("minute",m);
         }
         if(localStorage.getItem("second") == 0 || s <= localStorage.getItem("second")) {
