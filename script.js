@@ -39,12 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    let m = 0;
+    let s = 0;
+
     // Start / stop / reset timer
     function startTimer() {
+        
         timerInterval = setInterval(() => {
             totalSeconds++;
-            const m = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-            const s = String(totalSeconds % 60).padStart(2, '0');
+            m = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+            s = String(totalSeconds % 60).padStart(2, '0');
             timerEl.textContent = `${m}:${s}`;
         }, 1000);
     }   
@@ -247,11 +251,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function saveLocalStorage(total) {
         localStorage.setItem("moves",moves);
-        localStorage.setItem("times",totalSeconds);
+        localStorage.setItem("times",`${m}:${s}`);
     }
     function loadLocalStorage() {
-        moveCounterEl.innerHTML=localStorage.getItem("moves");
-        timerEl.innerHTML=localStorage.getItem("times");
+        moveCounterEl.innerText=localStorage.getItem("moves");
+        timerEl.innerText=localStorage.getItem("times");
     }
 
     // Initial setup
