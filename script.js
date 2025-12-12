@@ -184,11 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
         renderBoard();
     }
 
+    // theme 
     function initializeThemeToggle() {
         const prefersDark = window.matchMedia &&
             window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        if (prefersDark) {
+            // if local storage theme = dark
+        if (localStorage.getItem("theme") == "dark") {
             document.body.setAttribute('data-bs-theme', 'dark');
             themeToggle.checked = true;
         } else {
@@ -199,10 +201,15 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.addEventListener('change', () => {
             if (themeToggle.checked) {
                 document.body.setAttribute('data-bs-theme', 'dark');
+                // when cheked set save to local storage data
+                localStorage.setItem("theme","dark") 
             } else {
                 document.body.setAttribute('data-bs-theme', 'light');
+                localStorage.setItem("theme","light")
             }
         });
+
+        
     }
 
 
