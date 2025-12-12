@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const s = String(totalSeconds % 60).padStart(2, '0');
             timerEl.textContent = `${m}:${s}`;
         }, 1000);
-    }
+    }   
 
     function stopTimer() {
         clearInterval(timerInterval);
@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         finalMovesEl.textContent = moves;
         finalTimeEl.textContent = timerEl.textContent;
         winModal.show();
+        saveLocalStorage();
     }
 
     function restartGame() {
@@ -244,7 +245,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     startGameBtn.addEventListener('click', onStartGame);
 
+    function saveLocalStorage(total) {
+        localStorage.setItem("moves",moves);
+        localStorage.setItem("times",totalSeconds);
+    }
+    function loadLocalStorage() {
+        moveCounterEl.innerHTML=localStorage.getItem("moves");
+        timerEl.innerHTML=localStorage.getItem("times");
+    }
+
     // Initial setup
     initializeThemeToggle();
+    loadLocalStorage();
+
 
 });
