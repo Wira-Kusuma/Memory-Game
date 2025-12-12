@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         finalTimeEl.textContent = timerEl.textContent;
         winModal.show();
         saveLocalStorage();
+        loadLocalStorage();
     }
 
     function restartGame() {
